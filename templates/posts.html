@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+    <div class="header">
+        <img src="/static/img/log-blue.svg" class="logo-header" />
+        <h1>Home</h1>
+    </div>
+    <section class="post_form">
+
+
+        <form action="/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="home">
+                <div class="logo">
+                    <img class="img-logo" src="{%static 'img/user.png' %}" />
+
+                </div>
+
+                <div class="tweet">
+                    <input type="text" name="name" placeholder="Name"  class="name-input" required />
+                    <textarea name="body" placeholder="What's happening? "></textarea>
+<div class="post-file">
+    <input type="file" name="photo" class="file-input" />
+    <button type="submit" value="Post" class="btn">Tweet</button>
+</div>
+                   
+                </div>
+            </div>
+
+
+        </form>
+    </section>
+    <section class="posts">
+        <ul>
+            {% for post in posts reversed %}
+            <li>
+                <img class="menu_icon js-menu-icon" src="{%static 'img/menu.png' %}" />
+                <div class="menu">
+                    <a href="delete/{{ post.id }}/">Delete </a><br>
+                    <a href="edit/{{ post.id }}/">Edit </a>
+                </div>
+                <div class="logo">
+                    <img class="img-logo" src="{%static 'img/user.png' %}" />
+
+                </div>
+                <div class="name_body">
+                    <div class="name">{{post.name}}</div>
+                    <div class="datetime">{{post.created_at}}</div>
+                    <p>{{post.body}}</p>
+                    <img class="img-post" src="{{post.photo.url}}" /><br />
+
+                    <div class="like-post">
+                        <a href="/like/{{ post.id }}/">
+                            <img class="like-icon" src="{% static 'img/like.png' %}" alt="">
+                        </a>
+                        <p>{{post.like}}</p>
+                    </div>
+
+                </div>
+            </li>
+            {%endfor%}
+        </ul>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="{%static 'js/script.js' %}">
+
+    </script>
+
+</section>
+{%endblock%}

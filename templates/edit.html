@@ -1,0 +1,48 @@
+
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+    <div class="header">
+        <img src="/static/img/log-blue.svg" class="logo-header" />
+        <h1>Edit</h1>
+    </div>
+    <section class="post_form">
+
+
+        <form  method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="home">
+                <div class="logo">
+                    <img class="img-logo" src="{%static 'img/user.png' %}" />
+
+                </div>
+
+                <div class="tweet">
+                    <input type="text" name="name" value="{{post.name}}" placeholder="Name" class="name-input" required />
+                  
+                    <textarea name="body" placeholder="What's happening? ">{{post.body}}</textarea>
+
+<img style="width: 80%;" src="{{post.photo.url}}"/>
+
+                    <div class="post-file">
+    
+    <input type="file" name="photo" class="file-input" />
+    <a class="cancel-btn" href="/">cancel</a>
+    <button type="submit" value="Post" class="btn">Tweet</button>
+</div>
+                   
+                </div>
+            </div>
+
+
+        </form>
+    </section>
+   
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="{%static 'js/script.js' %}">
+
+    </script>
+
+</section>
+{%endblock%}
